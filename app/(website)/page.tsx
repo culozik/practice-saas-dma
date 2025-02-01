@@ -47,10 +47,10 @@ export default function Home() {
 					<div className="container px-4 py-8">
 						<div className="flex items-center justify-between">
 							<div className="flex items-center gap-2">
-								<div className="h-8 w-8 rounded-lg bg-white flex items-center justify-center font-bold">
+								<div className="h-8 w-8 rounded-lg bg-white flex items-center justify-center font-bold text-black">
 									IS
 								</div>
-								<span className="text-xl font-semibold text-primary-foreground">
+								<span className="text-xl font-semibold text-white">
 									InstaSlide
 								</span>
 							</div>
@@ -59,7 +59,7 @@ export default function Home() {
 								<Link href="#pricing">Pricing</Link>
 								<Link href="#about">About</Link>
 							</nav>
-							<Button className="bg-white text-primary hover:bg-blue-700 hover:text-white">
+							<Button className="">
 								<Link href="/dashboard">Login</Link>
 							</Button>
 						</div>
@@ -76,17 +76,10 @@ export default function Home() {
 							</p>
 
 							<div className="mt-8 flex justify-center gap-4">
-								<Button
-									size="lg"
-									className="bg-blue-600 text-white hover:bg-blue-700"
-								>
+								<Button size="lg" className="">
 									Get Started
 								</Button>
-								<Button
-									size="lg"
-									variant="outline"
-									className="border-blue-400  hover:bg-blue-700 hover:text-white hover:border-blue-700"
-								>
+								<Button size="lg" variant="outline" className="">
 									Learn More
 								</Button>
 							</div>
