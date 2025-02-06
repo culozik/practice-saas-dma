@@ -12,6 +12,7 @@ import UpgradeCard from "@/components/global/sidebar/UpgradeCard";
 import CreateAutomation from "@/components/global/info-bar/create-automation";
 import Search from "@/components/global/info-bar/search";
 import Notifications from "@/components/global/info-bar/notifications";
+import MainBreadCrumb from "@/components/global/main-bread-crumb";
 import { Separator } from "@/components/ui/separator";
 import { HelpDuoToneWhite } from "@/icons";
 
@@ -71,6 +72,7 @@ const InfoBar = ({ slug }: Props) => {
 					<CreateAutomation />
 					<Notifications />
 				</div>
+				<MainBreadCrumb page={page === slug ? "Home" : page} slug={slug} />
 			</div>
 		)
 	);
