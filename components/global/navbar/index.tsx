@@ -10,6 +10,7 @@ import ClerkAuthState from "@/components/global/clerk-auth-state";
 import SubscriptionPlan from "@/components/global/subscription-plan";
 import UpgradeCard from "@/components/global/sidebar/UpgradeCard";
 import CreateAutomation from "@/components/global/create-automation";
+import Search from "@/components/global/search";
 import { Separator } from "@/components/ui/separator";
 import { HelpDuoToneWhite } from "@/icons";
 
@@ -65,6 +66,7 @@ const Navbar = ({ slug }: Props) => {
 							</div>
 						</Sheet>
 					</span>
+					<Search />
 					<CreateAutomation />
 				</div>
 			</div>
