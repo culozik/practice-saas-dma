@@ -9,8 +9,9 @@ import Items from "@/components/global/sidebar/Items";
 import ClerkAuthState from "@/components/global/clerk-auth-state";
 import SubscriptionPlan from "@/components/global/subscription-plan";
 import UpgradeCard from "@/components/global/sidebar/UpgradeCard";
-import CreateAutomation from "@/components/global/create-automation";
-import Search from "@/components/global/search";
+import CreateAutomation from "@/components/global/info-bar/create-automation";
+import Search from "@/components/global/info-bar/search";
+import Notifications from "@/components/global/info-bar/notifications";
 import { Separator } from "@/components/ui/separator";
 import { HelpDuoToneWhite } from "@/icons";
 
@@ -22,7 +23,7 @@ type Props = {
 	slug: string;
 };
 
-const Navbar = ({ slug }: Props) => {
+const InfoBar = ({ slug }: Props) => {
 	const { page } = usePath();
 	const currentPage = PAGE_BREAD_CRUMBS.includes(page) || page == slug;
 
@@ -68,10 +69,11 @@ const Navbar = ({ slug }: Props) => {
 					</span>
 					<Search />
 					<CreateAutomation />
+					<Notifications />
 				</div>
 			</div>
 		)
 	);
 };
 
-export default Navbar;
+export default InfoBar;
