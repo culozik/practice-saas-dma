@@ -11,34 +11,9 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { PLANS } from "@/constants/pages";
 
 export default function Home() {
-	const plans = [
-		{
-			name: "Free Plan",
-			description: "Perfect for getting started",
-			price: "$0",
-			features: [
-				"Boost engagement with target responses",
-				"Automate comment replies to enhance audience interaction",
-				"Turn followers into customers with targeted messaging",
-			],
-			cta: "Get Started",
-		},
-		{
-			name: "Smart AI Plan",
-			description: "Advanced features for power users",
-			price: "$99",
-			features: [
-				"All features from Free Plan",
-				"AI-powered response generation",
-				"Advanced analytics and insights",
-				"Priority customer support",
-				"Custom branding options",
-			],
-			cta: "Upgrade Now",
-		},
-	];
 	return (
 		<main>
 			<section className="relative bg-gradient-to-b from-slate-900 via-blue-900 to-bg">
@@ -106,7 +81,7 @@ export default function Home() {
 						</p>
 					</div>
 					<div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 md:gap-8">
-						{plans.map((plan, index) => (
+						{PLANS.map((plan, index) => (
 							<Card key={index} className="flex flex-col justify-between">
 								<CardHeader>
 									<CardTitle>{plan.name}</CardTitle>

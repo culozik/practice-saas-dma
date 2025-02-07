@@ -8,16 +8,19 @@ type Props = {
 	params: { slug: string };
 };
 
-const Layout = ({ children, params }: Props) => {
+const Layout = async ({ children, params }: Props) => {
+	const { slug } = await params;
+
 	// Query client
 	// WIP: Query client and fetch data
 
 	return (
 		<div className="p-3">
-			<Sidebar slug={params.slug} />
+			<Sidebar slug={slug} />
 
 			<div className="lg:ml-[250px] lg:pl-10 lg:py-5 flex flex-col overflow-auto">
-				<InfoBar slug={params.slug} />
+				<InfoBar slug={slug} />
+				{children}
 			</div>
 		</div>
 	);
