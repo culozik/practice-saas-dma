@@ -9,7 +9,7 @@ import Items from "@/components/global/sidebar/Items";
 import ClerkAuthState from "@/components/global/clerk-auth-state";
 import SubscriptionPlan from "@/components/global/subscription-plan";
 import UpgradeCard from "@/components/global/sidebar/UpgradeCard";
-import CreateAutomation from "@/components/global/info-bar/create-automation";
+import CreateAutomation from "@/components/global/create-automation";
 import Search from "@/components/global/info-bar/search";
 import Notifications from "@/components/global/info-bar/notifications";
 import MainBreadCrumb from "@/components/global/main-bread-crumb";
