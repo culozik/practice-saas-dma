@@ -12,7 +12,7 @@ import UpgradeCard from "@/components/global/sidebar/UpgradeCard";
 import CreateAutomation from "@/components/global/create-automation";
 import Search from "@/components/global/info-bar/search";
 import Notifications from "@/components/global/info-bar/notifications";
-import MainBreadCrumb from "@/components/global/main-bread-crumb";
+import MainBreadCrumb from "@/components/global/breadcrumbs/main-bread-crumb";
 import { Separator } from "@/components/ui/separator";
 import { HelpDuoToneWhite } from "@/icons";
 
