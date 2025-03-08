@@ -8,13 +8,15 @@ type Props = {
 };
 
 const MainBreadCrumb = ({ page, slug }: Props) => {
+	const decodedSlug = decodeURIComponent(slug);
+
 	return (
 		<div className="flex flex-col items-start">
 			{page === "Home" && (
 				<div className="flex justify-center w-full">
 					<div className="radial--gradient w-4/12 py-5 lg:py-10 flex flex-col items-center">
 						<p className="text-text-secondary text-lg">Welcome back</p>
-						<h2 className="capitalize text-4xl font-medium">{slug}!</h2>
+						<h2 className="capitalize text-4xl font-medium">{decodedSlug}!</h2>
 					</div>
 				</div>
 			)}
