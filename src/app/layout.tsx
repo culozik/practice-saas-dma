@@ -4,6 +4,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "sonner";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import ReactQueryProvider from "@/providers/react-query-provider";
 
 import "./globals.css";
 
@@ -28,7 +29,7 @@ export default function RootLayout({
 						defaultTheme="dark"
 						disableTransitionOnChange
 					>
-						{children}
+						<ReactQueryProvider>{children}</ReactQueryProvider>
 						<Toaster />
 					</ThemeProvider>
 				</body>
