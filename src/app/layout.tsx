@@ -3,7 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "sonner";
 
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import ReactQueryProvider from "@/providers/react-query-provider";
 
 import "./globals.css";
