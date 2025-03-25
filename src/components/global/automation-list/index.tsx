@@ -7,13 +7,21 @@ import { usePath } from "@/hooks/use-nav";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import GradientButton from "../gradient-button";
+import { useQueryAutomations } from "@/hooks/user-queries";
 
 const AutomationList = () => {
-	// TODO: get the automation list data
-
 	const { pathname } = usePath();
 
-	// TODO: if no automations exist, show no automations
+	const { data } = useQueryAutomations();
+	console.log("🚀 ~ data:", data);
+
+	if (data?.status !== 200) {
+		return (
+			<div className="h-[70px] flex justify-center items-center flex-col gap-y-3">
+				No data!
+			</div>
+		);
+	}
 
 	return (
 		<div className="flex flex-col gap-y-3">
