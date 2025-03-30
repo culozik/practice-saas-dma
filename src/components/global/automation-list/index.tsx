@@ -3,79 +3,90 @@
 import React from "react";
 import Link from "next/link";
 
-import { usePath } from "@/hooks/use-nav";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import GradientButton from "../gradient-button";
+import CreateAutomation from "../create-automation";
+
+import { usePath } from "@/hooks/use-nav";
+import { cn, getMonth } from "@/lib/utils";
 import { useQueryAutomations } from "@/hooks/user-queries";
 
 const AutomationList = () => {
 	const { pathname } = usePath();
 
 	const { data } = useQueryAutomations();
-	console.log("🚀 ~ data:", data);
 
-	if (data?.status !== 200) {
+	if (data?.status !== 200 || data.data.length <= 0) {
 		return (
 			<div className="h-[70px] flex justify-center items-center flex-col gap-y-3">
-				No data!
+				<h3 className="text-lg text-gray-400">No Automations!</h3>
+				<CreateAutomation />
 			</div>
 		);
 	}
 
 	return (
 		<div className="flex flex-col gap-y-3">
-			<Link
-				href={`${pathname}/123123`}
-				className="bg-[#1D1D1D] hover:opacity-80 transition duration-100 rounded-xl p-5 border-[1px] radial--gradient--automations flex border-[#545454]"
-			>
-				<div className="flex flex-col flex-1 items-start">
-					<h2 className="text-xl font-semibold">Automation</h2>
-					<p className="text-[#9B9CA0] text-sm font-light mb-2">
-						This is from a comment
-					</p>
+			{data.data.map((automation) => (
+				<Link
+					key={automation.id}
+					href={`${pathname}/${automation.id}`}
+					className="bg-[#1D1D1D] hover:opacity-80 transition duration-100 rounded-xl p-5 border-[1px] radial--gradient--automations flex border-[#545454]"
+				>
+					<div className="flex flex-col flex-1 items-start">
+						<h2 className="text-xl font-semibold">{automation.name}</h2>
+						<p className="text-[#9B9CA0] text-sm font-light mb-2">
+							This is from a comment
+						</p>
 
-					{/* TODO: Automation keywords*/}
-					<div className="flex gap-x-2 flex-wrap mt-3">
-						<div
-							className={cn(
-								"rounded-full px-4 py-1 capitalize",
-								(0 + 1) % 1 === 0 &&
-									"bg-keyword-green/15 border-2 border-keyword-green",
-								(1 + 1) % 2 === 0 &&
-									"bg-keyword-purple/15 border-2 border-keyword-purple",
-								(2 + 1) % 3 === 0 &&
-									"bg-keyword-yellow/15 border-2 border-keyword-yellow",
-								(3 + 1) % 4 === 0 &&
-									"bg-keyword-red/15 border-2 border-keyword-red"
-							)}
-						>
-							get started
-						</div>
+						{automation.keywords.length > 0 ? (
+							<div className="flex gap-x-2 flex-wrap mt-3">
+								<div
+									className={cn(
+										"rounded-full px-4 py-1 capitalize",
+										(0 + 1) % 1 === 0 &&
+											"bg-keyword-green/15 border-2 border-keyword-green",
+										(1 + 1) % 2 === 0 &&
+											"bg-keyword-purple/15 border-2 border-keyword-purple",
+										(2 + 1) % 3 === 0 &&
+											"bg-keyword-yellow/15 border-2 border-keyword-yellow",
+										(3 + 1) % 4 === 0 &&
+											"bg-keyword-red/15 border-2 border-keyword-red"
+									)}
+								>
+									get started
+								</div>
+							</div>
+						) : (
+							<div className="rounded-full border-2 mt-3 border-dashed border-white/60 px-3 py-1">
+								<p className="text-sm text-[#bfc0c3]">No keywords</p>
+							</div>
+						)}
 					</div>
 
-					<div className="rounded-full border-2 mt-3 border-dashed border-white/60 px-3 py-1">
-						<p className="text-sm text-[#bfc0c3]">No key words</p>
+					<div className="flex flex-col justify-between">
+						<p className="capitalize text-sm font-light text-[#9B9CA0]">
+							{getMonth(automation.createdAt.getUTCMonth() + 1)}{" "}
+							{automation.createdAt.getUTCDate() === 1
+								? `${automation.createdAt.getUTCDate()}st`
+								: `${automation.createdAt.getUTCDate()}th`}{" "}
+							{automation.createdAt.getUTCFullYear()}
+						</p>
+						{automation.listener?.listener === "SMARTAI" ? (
+							<GradientButton
+								type="BUTTON"
+								className="w-full bg-background-80 text-white hover:bg-background-80"
+							>
+								Smart AI
+							</GradientButton>
+						) : (
+							<Button className="bg-background-80 hover:bg-background-80 text-white">
+								Standard
+							</Button>
+						)}
 					</div>
-				</div>
-
-				<div className="flex flex-col justify-between">
-					<p className="capitalize text-sm font-light text-[#9B9CA0]">
-						{/* TODO: attach real date */}
-						February 5th 2025
-					</p>
-					{/* TODO: render the button based on the listener */}
-					<GradientButton
-						type="BUTTON"
-						className="w-full bg-background-80 text-white hover:bg-background-80"
-					>
-						Smart AI
-					</GradientButton>
-					<Button className="bg-background-80 hover:bg-background-80 text-white">
-						Standard
-					</Button>
-				</div>
-			</Link>
+				</Link>
+			))}
 		</div>
 	);
 };
