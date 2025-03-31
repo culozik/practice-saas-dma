@@ -39,6 +39,7 @@ const AutomationList = () => {
 							This is from a comment
 						</p>
 
+						{/* TODO: Update keywords block*/}
 						{automation.keywords.length > 0 ? (
 							<div className="flex gap-x-2 flex-wrap mt-3">
 								<div
