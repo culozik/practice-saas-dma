@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useMemo } from "react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -8,13 +8,26 @@ import GradientButton from "../gradient-button";
 import CreateAutomation from "../create-automation";
 
 import { usePath } from "@/hooks/use-nav";
-import { cn, getMonth } from "@/lib/utils";
 import { useQueryAutomations } from "@/hooks/user-queries";
+import { useMutationDataState } from "@/hooks/use-mutation-data";
+
+import { cn, getMonth } from "@/lib/utils";
 
 const AutomationList = () => {
 	const { pathname } = usePath();
 
 	const { data } = useQueryAutomations();
+	const { latestVariable } = useMutationDataState(["create-automation"]);
+
+	const optimisticUiData = useMemo(() => {
+		if (latestVariable?.variables) {
+			const returnData = [...data!.data, latestVariable.variables];
+
+			return { data: returnData };
+		}
+
+		return data;
+	}, [latestVariable, data]);
 
 	if (data?.status !== 200 || data.data.length <= 0) {
 		return (
@@ -27,7 +40,7 @@ const AutomationList = () => {
 
 	return (
 		<div className="flex flex-col gap-y-3">
-			{data.data.map((automation) => (
+			{optimisticUiData!.data.map((automation) => (
 				<Link
 					key={automation.id}
 					href={`${pathname}/${automation.id}`}
@@ -39,7 +52,6 @@ const AutomationList = () => {
 							This is from a comment
 						</p>
 
-						{/* TODO: Update keywords block*/}
 						{automation.keywords.length > 0 ? (
 							<div className="flex gap-x-2 flex-wrap mt-3">
 								<div
