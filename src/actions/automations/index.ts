@@ -1,7 +1,12 @@
 "use server";
 
 import { onCurrentUser } from "../user";
-import { createAutomation, findAutomation, getAutomations } from "./queries";
+import {
+	createAutomation,
+	findAutomation,
+	getAutomations,
+	updateAutomation,
+} from "./queries";
 
 export const createAutomations = async (id?: string) => {
 	const user = await onCurrentUser();
@@ -57,3 +62,26 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 
 	return { title: info.data?.name };
 }
+
+export const updateAutomationName = async (
+	automationId: string,
+	data: {
+		name?: string;
+		active?: boolean;
+		automation?: string;
+	}
+) => {
+	await onCurrentUser();
+	try {
+		const update = await updateAutomation(automationId, data);
+
+		if (update) {
+			return { status: 200, data: "Automation successfully updated." };
+		}
+
+		return { status: 404, data: "Oops! Failed to update automation." };
+	} catch (error) {
+		console.log("🚀 ~ error:", error);
+		return { status: 500, data: "Oops! Something went wrong." };
+	}
+};
