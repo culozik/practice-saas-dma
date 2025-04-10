@@ -2,6 +2,7 @@
 
 import { onCurrentUser } from "../user";
 import {
+	addListener,
 	createAutomation,
 	findAutomation,
 	getAutomations,
@@ -80,6 +81,28 @@ export const updateAutomationName = async (
 		}
 
 		return { status: 404, data: "Oops! Failed to update automation." };
+	} catch (error) {
+		console.log("🚀 ~ error:", error);
+		return { status: 500, data: "Oops! Something went wrong." };
+	}
+};
+
+export const saveListener = async (
+	automationId: string,
+	listener: "SMARTAI" | "MESSAGE",
+	prompt: string,
+	reply?: string
+) => {
+	await onCurrentUser();
+
+	try {
+		const created = await addListener(automationId, listener, prompt, reply);
+
+		if (created) {
+			return { status: 200, data: "Listener successfully created." };
+		}
+
+		return { status: 400, data: "Oops! Failed to create listener." };
 	} catch (error) {
 		console.log("🚀 ~ error:", error);
 		return { status: 500, data: "Oops! Something went wrong." };
