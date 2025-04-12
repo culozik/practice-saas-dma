@@ -81,9 +81,9 @@ export const onUserInfo = async () => {
 			return { status: 200, data: profile };
 		}
 
-		return { status: 404, data: "User not found" };
+		return { status: 404 };
 	} catch (error) {
 		console.log(error);
-		return { status: 500, data: "Something went wring!" };
+		return { status: 500 };
 	}
 };
