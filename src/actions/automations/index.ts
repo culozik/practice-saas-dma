@@ -2,9 +2,11 @@
 
 import { onCurrentUser } from "../user";
 import {
+	addKeyword,
 	addListener,
 	addTrigger,
 	createAutomation,
+	deleteKeywordQuery,
 	findAutomation,
 	getAutomations,
 	updateAutomation,
@@ -120,6 +122,38 @@ export const saveTrigger = async (automationId: string, trigger: string[]) => {
 			return { status: 200, data: "Trigger successfully created." };
 		}
 		return { status: 400, data: "Oops! Failed to create trigger." };
+	} catch (error) {
+		console.log("🚀 ~ error:", error);
+		return { status: 500, data: "Oops! Something went wrong." };
+	}
+};
+
+export const saveKeyword = async (automationId: string, keyword: string) => {
+	await onCurrentUser();
+
+	try {
+		const create = await addKeyword(automationId, keyword);
+
+		if (create) {
+			return { status: 200, data: "Keyword successfully created." };
+		}
+		return { status: 400, data: "Oops! Failed to create keyword." };
+	} catch (error) {
+		console.log("🚀 ~ error:", error);
+		return { status: 500, data: "Oops! Something went wrong." };
+	}
+};
+
+export const deleteKeyword = async (id: string) => {
+	await onCurrentUser();
+
+	try {
+		const deleted = await deleteKeywordQuery(id);
+
+		if (deleted) {
+			return { status: 200, data: "Keyword successfully deleted." };
+		}
+		return { status: 400, data: "Oops! Failed to delete keyword." };
 	} catch (error) {
 		console.log("🚀 ~ error:", error);
 		return { status: 500, data: "Oops! Something went wrong." };
