@@ -1,7 +1,7 @@
 "use client";
 
 import { use, useEffect } from "react";
-import { HydrationBoundary } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import AutomationBreadcrumb from "@/components/global/breadcrumbs/automations";
 import Trigger from "@/components/global/automations/trigger";
@@ -27,7 +27,7 @@ const Page = (props: Props) => {
 	}, [id]);
 
 	return (
-		<HydrationBoundary state={queryClient}>
+		<HydrationBoundary state={dehydrate(queryClient)}>
 			<div className="flex flex-col items-center gap-y-20">
 				<AutomationBreadcrumb id={id} />
 
