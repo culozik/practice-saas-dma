@@ -48,7 +48,7 @@ const Trigger = ({ id }: Props) => {
 					</>
 				)}
 
-				{data.data.listener && <ThenAction id={id} />}
+				{!data.data.listener && <ThenAction id={id} />}
 			</div>
 		);
 	}
@@ -81,7 +81,7 @@ const Trigger = ({ id }: Props) => {
 					disabled={types?.length === 0}
 					className="bg-gradient-to-br from-[#3352CC] font-medium text-white to-[#1C2D70]"
 				>
-					<Loader state={isPending}> Create Trigger</Loader>
+					<Loader state={isPending}>Create Trigger</Loader>
 				</Button>
 			</div>
 		</TriggerButton>

@@ -5,6 +5,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import AutomationBreadcrumb from "@/components/global/breadcrumbs/automations";
 import Trigger from "@/components/global/automations/trigger";
+import ThenNode from "@/components/global/automations/then/node";
 
 import { Warning } from "@/icons";
 import { queryClient } from "@/lib/react-query/queryClient";
@@ -39,6 +40,8 @@ const Page = (props: Props) => {
 
 					<Trigger id={id} />
 				</div>
+
+				<ThenNode id={id} />
 			</div>
 		</HydrationBoundary>
 	);
