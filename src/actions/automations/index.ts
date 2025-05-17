@@ -5,6 +5,7 @@ import { findUser } from "../user/queries";
 import {
 	addKeyword,
 	addListener,
+	addPost,
 	addTrigger,
 	createAutomation,
 	deleteKeywordQuery,
@@ -178,5 +179,30 @@ export const getProfilePosts = async () => {
 	} catch (error) {
 		console.log("server side Error in getting posts:", error);
 		return { status: 500, data: [] };
+	}
+};
+
+export const savePosts = async (
+	automationId: string,
+	posts: {
+		postId: string;
+		caption?: string;
+		media: string;
+		mediaType: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
+	}[]
+) => {
+	await onCurrentUser();
+
+	try {
+		const create = await addPost(automationId, posts);
+
+		if (create) {
+			return { status: 200, data: "Posts attached." };
+		}
+
+		return { status: 400, data: "Oops! Automation not found." };
+	} catch (error) {
+		console.log("Error saving posts:", error);
+		return { status: 500, data: "Oops! Something went wrong." };
 	}
 };

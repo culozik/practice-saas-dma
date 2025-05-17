@@ -140,3 +140,24 @@ export const deleteKeywordQuery = async (id: string) => {
 		},
 	});
 };
+
+export const addPost = async (
+	automationId: string,
+	posts: {
+		postId: string;
+		caption?: string;
+		media: string;
+		mediaType: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
+	}[]
+) => {
+	return await client.automation.update({
+		where: { id: automationId },
+		data: {
+			posts: {
+				createMany: {
+					data: posts,
+				},
+			},
+		},
+	});
+};
